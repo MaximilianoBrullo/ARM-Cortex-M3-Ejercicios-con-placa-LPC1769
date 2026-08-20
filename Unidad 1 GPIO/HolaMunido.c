@@ -13,7 +13,7 @@
  */
 void configPCB(void);
 void delay(void);
-void blinkLED(void);
+void blinkLed(void);
 
 int main(void){
 	configPCB();
@@ -24,7 +24,7 @@ int main(void){
 }
 
 /*
- * @brief Configura el pin P0.22 como salida digital
+ * @brief Configure el pin P0.22 como salida digital
  *
  * @details Selecciona la funcion GPIO para p0.22, configura el pin como
  * 			salida digital y habilita su acceso mediante el registro FIOMASK
@@ -33,7 +33,7 @@ void configPCB(void){
 	LPC_PINCON->PINSEL1 &= ~(0b11<<12);//p0.22 GPIO Function
 	//no utilizamos pinMode ya que es solo para cuando usamos el pin como entrada
 	LPC_GPIO0->FIODIR |= (1<<22);//p0.22 Como salida al poner 1 logico en el pin 22
-	LPC_GPIO0->FIOMASK |= (1<<22);//coloco un un 1 logicoara que no cambie el estado de FIO set,clr,pin
+	LPC_GPIO0->FIOMASK &= ~(1<<22);//coloco un un 1 logicoara que no cambie el estado de FIO set,clr,pin
 	return;
 }
 
